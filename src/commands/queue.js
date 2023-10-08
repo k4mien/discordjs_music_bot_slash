@@ -1,11 +1,13 @@
-const Discord = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const distube = require("../distube");
 
 module.exports = {
-  name: "queue",
-  aliases: ["q"],
-  run: async (client, message) => {
-    const queue = client.distube.getQueue(message);
-    if (!queue) return message.channel.send(`There is nothing playing!`);
+  data: new SlashCommandBuilder()
+    .setName("queue")
+    .setDescription("Displays the current songs in the music queue"),
+  async execute(interaction) {
+    const queue = await distube.getQueue(interaction);
+    if (!queue) return interaction.reply("There is nothing playing!");
     const q = queue.songs
       .map(
         (song, i) =>
@@ -18,7 +20,7 @@ module.exports = {
       .join("\n");
     message.channel.send({
       embeds: [
-        new Discord.EmbedBuilder()
+        new EmbedBuilder()
           .setColor("Red")
           .setTitle(`In Queue\n\n`)
           .setDescription(`${q}`),
