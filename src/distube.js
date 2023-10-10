@@ -11,9 +11,8 @@ const distube = new DisTube(client, {
   leaveOnStop: false,
   leaveOnEmpty: true,
   leaveOnFinish: false,
-  emitNewSongOnly: true,
-  emitAddSongWhenCreatingQueue: false,
-  emitAddListWhenCreatingQueue: false,
+  emitAddListWhenCreatingQueue: true,
+  emitAddSongWhenCreatingQueue: true,
   ytdlOptions: {
     highWaterMark: 1024 * 1024 * 64,
     quality: "highestaudio",
@@ -46,9 +45,6 @@ distube
       );
     queue.textChannel.send({ embeds: [embed] });
   })
-  .on("disconnect", (queue) => {
-    queue.textChannel.send("Disconnected!");
-  })
   .on("empty", (queue) => {
     queue.textChannel.send("Channel is empty. Disconnected!");
   })
@@ -66,6 +62,10 @@ distube
       )
       .setThumbnail(song.thumbnail);
     queue.textChannel.send({ embeds: [embed] });
+  })
+  .on("initQueue", (queue) => {
+    queue.autoplay = false;
+    queue.volume = 100;
   });
 
 module.exports = distube;

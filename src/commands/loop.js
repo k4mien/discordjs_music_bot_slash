@@ -1,26 +1,32 @@
-// module.exports = {
-//   name: "loop",
-//   inVoiceChannel: true,
-//   run: async (client, message, args) => {
-//     const queue = client.distube.getQueue(message);
-//     if (!queue) return message.channel.send(`There is nothing playing!`);
+const { SlashCommandBuilder } = require("discord.js");
+const distube = require("../distube");
 
-//     let mode = null;
-//     switch (args[0]) {
-//       case "off":
-//         mode = 0;
-//         break;
-//       case "on":
-//         mode = 1;
-//         break;
-//     }
-//     if (mode != null) {
-//       mode = queue.setRepeatMode(mode);
-//       message.channel.send(
-//         mode == "0"
-//           ? `The player is no longer on repeat.`
-//           : `The player will now repeat the current track.`
-//       );
-//     }
-//   },
-// };
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("loop")
+    .setDescription("Loops the current song")
+    .addStringOption((option) =>
+      option
+        .setName("mode")
+        .setDescription("on | off")
+        .setRequired(true)
+        .addChoices({ name: "on", value: "1" }, { name: "off", value: "0" })
+    ),
+  async execute(interaction) {
+    const userInput = interaction.options.getString("mode");
+    const queue = await distube.getQueue(interaction);
+    if (!queue)
+      return interaction.reply({
+        content: "There is nothing in the queue right now!",
+        ephemeral: true,
+      });
+
+    let mode = Number(userInput);
+    queue.setRepeatMode(mode);
+    return interaction.reply(
+      mode == "0"
+        ? `The player is no longer on repeat.`
+        : `The player will now repeat the current track.`
+    );
+  },
+};

@@ -1,16 +1,23 @@
-// module.exports = {
-//   name: "skip",
-//   inVoiceChannel: true,
-//   run: async (client, message, args) => {
-//     const queue = client.distube.getQueue(message);
-//     if (!queue)
-//       return message.channel.send(`There is nothing in the queue right now!`);
-//     if (queue.songs.length == 1) {
-//       await queue.stop();
-//       message.channel.send(`Skipped!`);
-//     } else {
-//       await queue.skip();
-//       message.channel.send(`Skipped!`);
-//     }
-//   },
-// };
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const distube = require("../distube");
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("skip")
+    .setDescription("Skips the current song"),
+  async execute(interaction) {
+    const queue = await distube.getQueue(interaction);
+    if (!queue)
+      return interaction.reply({
+        content: "There is nothing in the queue right now!",
+        ephemeral: true,
+      });
+    if (queue.songs.length == 1) {
+      await queue.stop();
+      return interaction.reply(`Skipped!`);
+    } else {
+      await queue.skip();
+      return interaction.reply(`Skipped!`);
+    }
+  },
+};

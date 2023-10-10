@@ -15,6 +15,7 @@ async function deployCommands() {
     const command = require(filePath);
     if ("data" in command && "execute" in command) {
       commands.push(command.data.toJSON());
+      console.log("\x1b[36m%s\x1b[0m", "|Loaded|", command.data.name);
     }
   }
 

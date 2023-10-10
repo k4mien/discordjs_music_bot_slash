@@ -4,10 +4,14 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("queue")
-    .setDescription("Displays the current songs in the music queue"),
+    .setDescription("Displays all songs in the queue"),
   async execute(interaction) {
     const queue = await distube.getQueue(interaction);
-    if (!queue) return interaction.reply("There is nothing playing!");
+    if (!queue)
+      return interaction.reply({
+        content: "There is nothing in the queue right now!",
+        ephemeral: true,
+      });
     const q = queue.songs
       .map(
         (song, i) =>
@@ -18,7 +22,7 @@ module.exports = {
           }**\n`
       )
       .join("\n");
-    message.channel.send({
+    await interaction.reply({
       embeds: [
         new EmbedBuilder()
           .setColor("Red")

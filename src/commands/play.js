@@ -1,14 +1,14 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { distube } = require("../distube");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
+const distube = require("../distube");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("play")
-    .setDescription("Plays a song")
+    .setDescription("Plays a song or playlist")
     .addStringOption((option) =>
       option
         .setName("query")
-        .setDescription("Search the song (type a name or provide URL)")
+        .setDescription("Search the song [ URL | songname | playlist ]")
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -31,18 +31,19 @@ module.exports = {
 
     if (!voiceChannel) {
       return interaction.reply({
-        content: "Please join a voice channel first!",
+        content: "You have to be in a voice channel!",
         ephemeral: true,
       });
     }
 
-    await interaction.reply("test");
+    await interaction.reply("Searching...");
 
     try {
       await distube.play(voiceChannel, query, {
-        textChannel: interaction.channel,
         member: interaction.member,
+        textChannel: interaction.channel,
       });
+      return interaction.editReply("Searching done!");
     } catch (error) {
       console.error(error);
     }

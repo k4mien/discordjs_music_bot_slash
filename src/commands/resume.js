@@ -1,16 +1,25 @@
-// module.exports = {
-//   name: "resume",
-//   aliases: ["resume", "unpause"],
-//   inVoiceChannel: true,
-//   run: async (client, message) => {
-//     const queue = client.distube.getQueue(message);
-//     if (!queue)
-//       return message.channel.send(`There is nothing in the queue right now!`);
-//     if (queue.paused) {
-//       queue.resume();
-//       message.channel.send("Resumed the song for you :)");
-//     } else {
-//       message.channel.send("The queue is not paused!");
-//     }
-//   },
-// };
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const distube = require("../distube");
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("resume")
+    .setDescription("Resumes the current song"),
+  async execute(interaction) {
+    const queue = await distube.getQueue(interaction);
+    if (!queue)
+      return interaction.reply({
+        content: "There is nothing in the queue right now!",
+        ephemeral: true,
+      });
+    if (queue.paused) {
+      queue.resume();
+      return interaction.reply("Resumed the song for you :)");
+    } else {
+      return interaction.reply({
+        content: "The queue is not paused!",
+        ephemeral: true,
+      });
+    }
+  },
+};

@@ -1,6 +1,6 @@
-FROM node:20.7.0
+FROM node:18.18.0
 WORKDIR /app
 COPY src/package.json .
-RUN apt-get update -y && apt-get install -y ffmpeg
+RUN apt-get upgrade -y && apt-get update -y && apt-get install -y ffmpeg
 RUN npm install -y
 COPY src ./
