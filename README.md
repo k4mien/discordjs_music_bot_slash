@@ -1,3 +1,4 @@
 # discord_bot
 
-WIP...
+Discord bot for playing music from youtube/spotify/soundcloud and others
+Slash commands
