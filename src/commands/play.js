@@ -4,7 +4,7 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("play")
-    .setDescription("Plays a song or playlist")
+    .setDescription("Play a song or playlist")
     .addStringOption((option) =>
       option
         .setName("query")

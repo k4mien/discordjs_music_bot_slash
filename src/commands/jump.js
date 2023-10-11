@@ -4,7 +4,7 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("jump")
-    .setDescription("Skips the current song")
+    .setDescription("Skip to the specified song")
     .addStringOption((option) =>
       option
         .setName("position")

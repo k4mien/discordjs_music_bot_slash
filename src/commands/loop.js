@@ -6,7 +6,7 @@ mode = 0;
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("loop")
-    .setDescription("Loops the current song")
+    .setDescription("Loop current song")
     .addStringOption((option) =>
       option
         .setName("mode")

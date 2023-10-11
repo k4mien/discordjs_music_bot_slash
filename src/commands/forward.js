@@ -4,7 +4,7 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("forward")
-    .setDescription("Forwards the song")
+    .setDescription("Forward the current song")
     .addStringOption((option) =>
       option
         .setName("time")

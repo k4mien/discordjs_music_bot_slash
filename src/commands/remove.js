@@ -4,7 +4,7 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("remove")
-    .setDescription("Removes indicated song from the queue")
+    .setDescription("Remove a song from the queue")
     .addStringOption((option) =>
       option
         .setName("position")

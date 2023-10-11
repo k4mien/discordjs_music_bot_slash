@@ -4,7 +4,7 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("leave")
-    .setDescription("Leaves the channel"),
+    .setDescription("Leave the channel"),
   async execute(interaction) {
     const voiceChannel = interaction.member.voice.channel;
     const botMember = interaction.guild.members.cache.get(

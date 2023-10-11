@@ -4,7 +4,7 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("queue")
-    .setDescription("Displays all songs in the queue"),
+    .setDescription("Display all songs in the queue"),
   async execute(interaction) {
     const queue = await distube.getQueue(interaction);
     if (!queue)

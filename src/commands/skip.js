@@ -4,7 +4,7 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("skip")
-    .setDescription("Skips the current song"),
+    .setDescription("Skip current song"),
   async execute(interaction) {
     const queue = await distube.getQueue(interaction);
     if (!queue)
