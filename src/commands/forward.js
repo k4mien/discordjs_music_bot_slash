@@ -4,11 +4,11 @@ const distube = require("../distube");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("forward")
-    .setDescription("Forwards teh song by x seconds")
+    .setDescription("Forwards the song")
     .addStringOption((option) =>
       option
         .setName("time")
-        .setDescription("How many seconds would you like to skip?")
+        .setDescription("How many seconds?")
         .setRequired(true)
     ),
   async execute(interaction) {

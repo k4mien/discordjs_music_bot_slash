@@ -1,6 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 const distube = require("../distube");
-const { emit } = require("nodemon");
 
 module.exports = {
   data: new SlashCommandBuilder()
