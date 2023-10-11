@@ -9,7 +9,11 @@ module.exports = {
     const queue = await distube.getQueue(interaction);
     if (!queue)
       return interaction.reply({
-        content: "There is nothing in the queue right now!",
+        embeds: [
+          new EmbedBuilder()
+            .setColor("Blue")
+            .setDescription("There is nothing in the queue right now!"),
+        ],
         ephemeral: true,
       });
     if (queue.paused) {
@@ -17,7 +21,11 @@ module.exports = {
       return interaction.reply("Resumed the song for you :)");
     } else {
       return interaction.reply({
-        content: "The queue is not paused!",
+        embeds: [
+          new EmbedBuilder()
+            .setColor("Blue")
+            .setDescription("The queue is not paused!"),
+        ],
         ephemeral: true,
       });
     }

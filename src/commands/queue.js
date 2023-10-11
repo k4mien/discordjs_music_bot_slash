@@ -9,7 +9,11 @@ module.exports = {
     const queue = await distube.getQueue(interaction);
     if (!queue)
       return interaction.reply({
-        content: "There is nothing in the queue right now!",
+        embeds: [
+          new EmbedBuilder()
+            .setColor("Blue")
+            .setDescription("There is nothing in the queue right now!"),
+        ],
         ephemeral: true,
       });
     const q = queue.songs
@@ -25,7 +29,7 @@ module.exports = {
     await interaction.reply({
       embeds: [
         new EmbedBuilder()
-          .setColor("Red")
+          .setColor("Blue")
           .setTitle(`In Queue\n\n`)
           .setDescription(`${q}`),
       ],

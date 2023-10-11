@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const distube = require("../distube");
 
 module.exports = {
@@ -17,16 +17,26 @@ module.exports = {
     const queue = await distube.getQueue(interaction);
     if (!queue)
       return interaction.reply({
-        content: "There is nothing in the queue right now!",
+        embeds: [
+          new EmbedBuilder()
+            .setColor("Blue")
+            .setDescription("There is nothing in the queue right now!"),
+        ],
         ephemeral: true,
       });
 
     let mode = Number(userInput);
     queue.setRepeatMode(mode);
-    return interaction.reply(
-      mode == "0"
-        ? `The player is no longer on repeat.`
-        : `The player will now repeat the current track.`
-    );
+    return interaction.reply({
+      embeds: [
+        new EmbedBuilder()
+          .setColor("Blue")
+          .setDescription(
+            mode == "0"
+              ? `The player is no longer on repeat.`
+              : `The player will now repeat the current track.`
+          ),
+      ],
+    });
   },
 };

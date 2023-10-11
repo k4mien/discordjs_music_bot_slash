@@ -3,12 +3,12 @@ const distube = require("../distube");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("skipto")
-    .setDescription("Skips the current song to")
+    .setName("remove")
+    .setDescription("Removes specific song from the queue")
     .addStringOption((option) =>
       option
         .setName("position")
-        .setDescription("Song position in the queue")
+        .setDescription("Provide the song position you want to delete")
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -41,18 +41,13 @@ module.exports = {
         ],
         ephemeral: true,
       });
-    } else if (queue.songs.length == 1) {
-      await queue.stop();
-      return interaction.reply({
-        embeds: [
-          new EmbedBuilder().setColor("Blue").setDescription("Song skipped!"),
-        ],
-      });
     } else {
-      await queue.jump(position);
+      await queue.songs.splice(position, 1);
       return interaction.reply({
         embeds: [
-          new EmbedBuilder().setColor("Blue").setDescription("Song skipped!"),
+          new EmbedBuilder()
+            .setColor("Blue")
+            .setDescription("Song removed from the queue!"),
         ],
       });
     }

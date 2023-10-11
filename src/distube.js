@@ -31,19 +31,19 @@ const distube = new DisTube(client, {
 
 distube
   .on("addList", (queue, playlist) => {
-    const embed = new EmbedBuilder().setColor("Red").setDescription(
+    const embed = new EmbedBuilder().setColor("Blue").setDescription(
       `**[${playlist.name}](${playlist.url})** playlist has been added to the queue.
       \`(${playlist.songs.length} songs)\``
     );
-    queue.textChannel.send({ embeds: [embed] });
+    playlist.metadata.i.editReply({ embeds: [embed] });
   })
   .on("addSong", (queue, song) => {
     const embed = new EmbedBuilder()
-      .setColor("Red")
+      .setColor("Blue")
       .setDescription(
         `**[${song.name}](${song.url})** has been added to the queue.\n`
       );
-    queue.textChannel.send({ embeds: [embed] });
+    song.metadata.i.editReply({ embeds: [embed] });
   })
   .on("empty", (queue) => {
     queue.textChannel.send("Channel is empty. Disconnected!");
@@ -55,7 +55,7 @@ distube
   })
   .on("playSong", (queue, song) => {
     const embed = new EmbedBuilder()
-      .setColor("Red")
+      .setColor("Blue")
       .setTitle("Playing")
       .setDescription(
         `[${song.name}](${song.url}) - \`[${song.formattedDuration}]\``

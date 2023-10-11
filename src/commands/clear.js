@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const distube = require("../distube");
 
 module.exports = {
@@ -9,10 +9,20 @@ module.exports = {
     const queue = await distube.getQueue(interaction);
     if (!queue)
       return interaction.reply({
-        content: "There is nothing in the queue right now!",
+        embeds: [
+          new EmbedBuilder()
+            .setColor("Blue")
+            .setDescription("There is nothing in the queue right now!"),
+        ],
         ephemeral: true,
       });
     await queue.stop();
-    return interaction.reply("Cleared all songs in the queue!");
+    return interaction.reply({
+      embeds: [
+        new EmbedBuilder()
+          .setColor("Blue")
+          .setDescription("Cleared all songs in the queue!"),
+      ],
+    });
   },
 };
