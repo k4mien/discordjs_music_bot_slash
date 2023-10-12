@@ -19,3 +19,4 @@ How to setup bot?
 4. Enjoy music.
 
 If you have problem with loading slash commands go to deployCommands.js file and comment section where you load commands and comment out section above where you put empty body.
+Run the container again to deploy empty body, then stop container and reverse the process above.
