@@ -22,7 +22,7 @@ module.exports = {
           `${i === 0 ? "**Now Playing:**" : `${i}.`} [${song.name}](${
             song.url
           }) - \`[${song.formattedDuration}]\`, added by: **${
-            song.user.username
+            song.user.displayName
           }**\n`
       )
       .join("\n");
