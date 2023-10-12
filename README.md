@@ -15,7 +15,7 @@ How to setup bot?
 
 1. Clone the repository
 2. Change config.json.example to config.json and change TOKEN and CLIENTID.
-3. Start docker with or docker-compose -d up
+3. Start docker with docker-compose -d up
 4. Enjoy music.
 
 If you have problem with loading slash commands go to deployCommands.js file and comment section where you load commands and comment out section above where you put empty body.
