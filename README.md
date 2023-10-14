@@ -6,7 +6,8 @@ Slash commands instead of prefix.
 
 To Do:
 
-- fix queue list for more than 4096 char. 
+- fix queue list for more than 4096 char. => fixed in repo with prefix
+- more features? 
 
 
 How to setup bot?
